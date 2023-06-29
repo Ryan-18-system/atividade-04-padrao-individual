@@ -91,6 +91,10 @@ public class Candidate {
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "nome='" + nome + '\'' +
+                ", pontuacaoFinal=" + pontuacaoFinal +
+                ", notaDesempenho=" + notaDesempenho;
+    }
 }

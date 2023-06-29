@@ -30,7 +30,7 @@ public class Main {
         candidate.setNotaDesempenho(90.00);
         listCandidate.add(candidate);
 
-        Candidate candidate2 = new Candidate("Nicolas", "1234124", 4, 2);
+        Candidate candidate2 = new Candidate("Nome 2", "1234124", 4, 2);
         candidate2.setTitulacaoAcademica(Titration.ESPECIALISTA);
         candidate2.setExperienciaEnsino(ExperienceTeaching.MEDIO);
         candidate2.setExperienciaGestao(ExperienceManagement.NO_EXPERIENCE);
@@ -63,16 +63,24 @@ public class Main {
                 .filter(c -> !calculateFinalScore.evaluationPerformance(c.getNotaDesempenho()))
                 .map(c2 -> c2.getNome() + " - Nota: " + c2.getNotaDesempenho())
                 .toList();
+
+        listCandidate.removeIf(c -> !calculateFinalScore.evaluationPerformance(c.getNotaDesempenho()));
+
         listCandidate.forEach(ca -> ca.setPontuacaoFinal(calculateFinalScore.calcularPontuacaoFinal(ca)));
+
         listCandidate.sort((c1, c2) -> Double.compare(c2.getPontuacaoFinal(), c1.getPontuacaoFinal()));
-        List<String> listaResultados = new ArrayList<>();
+
+        /**
+         * Exibição
+         */
+        System.out.println("#####PONTUAÇÃO FINAL####");
         for (Candidate candidato : listCandidate) {
-            listaResultados.add(candidato.getNome() +" nota-> " + candidato.getPontuacaoFinal());
+            System.out.println(candidato.toString());
         }
-        for (String resultado : listaResultados) {
-            System.out.println(resultado);
-        }
+
+        System.out.println("######REPROVADOS######");
         for(String repro : ListaReprovados){
+
             System.out.println(repro);
         }
 
